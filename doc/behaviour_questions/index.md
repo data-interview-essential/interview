@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Behaviour questions
+title: Behaviour Questions
 nav_order: 2
 has_children: true
 ---
