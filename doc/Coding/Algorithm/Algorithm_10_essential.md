@@ -147,8 +147,6 @@ nav_order: 8
    Time Complexity: O(n), where n is the number of nodes in the linked list.
    Space Complexity: O(1)
 
-Certainly! Here are examples and solutions for the remaining algorithms:
-
 7. Sorting Fundamentals (Quicksort, Mergesort, Bubblesort):
    Example: Implement Quicksort to sort an array.
    Solution:
