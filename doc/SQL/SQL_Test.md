@@ -1,7 +1,7 @@
 ---
 layout: default
 title: SQL Exercise
-parent: python
+parent: SQL
 nav_order: 8
 ---
 

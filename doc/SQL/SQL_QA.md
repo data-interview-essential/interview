@@ -1,7 +1,7 @@
 ---
 layout: default
 title: SQL Q&A
-parent: python
+parent: SQL
 nav_order: 4
 ---
 

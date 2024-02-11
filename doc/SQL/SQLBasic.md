@@ -1,7 +1,7 @@
 ---
 layout: default
 title: SQL Basic
-parent: python
+parent: SQL
 nav_order: 4
 ---
 
@@ -132,13 +132,54 @@ Preparing for a SQL interview as a data scientist involves focusing on several k
       JOIN employees e ON ms.manager_id = e.employee_id;
       ```
 
-11. **Optimization and Performance**:
+11. **CASE clause**
+    The `CASE` clause in SQL is a versatile conditional expression that allows you to perform if-then-else type logic directly within your SQL queries. It's useful for transforming data based on certain conditions, implementing conditional aggregation, and more.
+
+   **Scenario**: You have an `employees` table with columns for `employee_id`, `name`, `department`,  and `performance_score`. The `performance_score` is an integer that rates the employee's   performance.
+
+   **Table: Employees**
+
+   - `employee_id` (integer)
+   - `name` (varchar)
+   - `department` (varchar)
+   - `performance_score` (integer)
+
+   **Objective**: Use the `CASE` clause to categorize employees into 'Excellent', 'Good', 'Average',  'Below Average', based on their `performance_score`.
+
+   **SQL Query with CASE Clause**:
+   ```sql
+   SELECT employee_id,
+          name,
+          department,
+          performance_score,
+          CASE 
+              WHEN performance_score >= 90 THEN 'Excellent'
+              WHEN performance_score >= 75 AND performance_score < 90 THEN 'Good'
+              WHEN performance_score >= 60 AND performance_score < 75 THEN 'Average'
+              ELSE 'Below Average'
+          END AS performance_category
+   FROM employees;
+   ```
+
+   **Explanation**:
+
+   - The `CASE` clause evaluates the `performance_score` for each employee.
+   - Based on the score, it assigns a `performance_category`:
+       - Scores 90 and above are categorized as 'Excellent'.
+       - Scores between 75 (inclusive) and 90 (exclusive) are 'Good'.
+       - Scores between 60 (inclusive) and 75 (exclusive) are 'Average'.
+       - Scores below 60 are categorized as 'Below Average'.
+   - The result is a list of employees along with their `performance_category` based on their   `performance_score`.
+
+   This example illustrates how the `CASE` clause can be used to analyze and categorize data directly    within an SQL query, providing a powerful tool for data transformation and insight generation   without the need for additional processing outside the database.
+
+12.  **Optimization and Performance**:
     - **Example**: Use indexes to improve query performance.
       ```sql
       CREATE INDEX idx_column ON table(column_name);
       ```
 
-12. **Database-specific Features** (depending on the SQL database being used, e.g., MySQL, PostgreSQL):
+13.  **Database-specific Features** (depending on the SQL database being used, e.g., MySQL, PostgreSQL):
     - **Example**: PostgreSQL's JSON functions.
       ```sql
       SELECT data->>'key' FROM json_table;
@@ -227,5 +268,29 @@ This example will cover points 6 to 9 (Set Operations, Window Functions, Data Ty
    FROM sales
    GROUP BY product_id;
    ```
+### Example 3: Fill Null with partition average
+
+
+   ```sql
+   WITH DepartmentSalaryAverage AS (
+       SELECT 
+           department, 
+           AVG(salary) AS avg_salary
+       FROM 
+           your_table_name
+       GROUP BY 
+           department
+   )
+   SELECT 
+       t.department, 
+       COALESCE(t.salary, dsa.avg_salary) AS salary
+   FROM 
+       your_table_name t
+   LEFT JOIN 
+       DepartmentSalaryAverage dsa ON t.department = dsa.department;
+   ```
+   
+   This code snippet uses a CTE (`WITH` clause) to calculate the average salary for each department   first. Then, it selects the department and salary from the original table, using `LEFT JOIN` to   include the average salary calculated in the CTE. `COALESCE` is used to substitute any `NULL`  salary with the average salary for the respective department. This approach ensures that every row  has a salary value, either the actual salary or the department's average salary if the original  salary is `NULL`.
+
 
 These examples provide a comprehensive test covering a wide range of SQL skills relevant to data science. Practicing these scenarios will help you prepare effectively for your SQL interview.
