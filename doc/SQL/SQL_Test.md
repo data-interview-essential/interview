@@ -48,11 +48,22 @@ For a data engineer position at a big tech company, the SQL coding test might in
 
 3. First page viewed by each user after signup:
    ```sql
-   SELECT u.user_id, p.page_id, MIN(p.view_date) AS first_view_date
-   FROM users u
-   JOIN page_views p ON u.user_id = p.user_id
-   WHERE p.view_date >= u.signup_date
-   GROUP BY u.user_id;
+   WITH RankedPageViews AS (
+     SELECT
+       u.user_id,
+       p.page_id,
+       p.view_date,
+       RANK() OVER (PARTITION BY u.user_id ORDER BY p.view_date ASC) AS rank
+     FROM users u
+     JOIN page_views p ON u.user_id = p.user_id
+     WHERE p.view_date >= u.signup_date
+   )
+   SELECT
+     user_id,
+     page_id,
+     view_date AS first_view_date
+   FROM RankedPageViews
+   WHERE rank = 1;
    ```
    **Answer**: This query finds the first page each user viewed after their signup date by selecting the minimum `view_date` for each user that is on or after their `signup_date`.
 
@@ -71,5 +82,3 @@ For a data engineer position at a big tech company, the SQL coding test might in
    **Answer**: Implement data validation rules at the point of data entry (e.g., constraints in the database schema). Regularly run data quality checks to identify and correct anomalies or inconsistencies. Use foreign key constraints to maintain referential integrity between `users` and `page_views`.
 
 These tasks and follow-up questions cover a range of skills relevant to a data engineer role, including SQL querying, database optimization, and data quality assurance.
-
-# SQL Coding Test Example 2: User Engagement Analysis
