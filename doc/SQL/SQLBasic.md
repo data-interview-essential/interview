@@ -53,6 +53,36 @@ Preparing for a SQL interview as a data scientist involves focusing on several k
      ```
 
 7. **Window Functions**:
+
+   Window functions are powerful tools in SQL that allow you to perform calculations across a set of rows that are somehow related to the current row. These functions can be incredibly useful for analytics and data processing tasks. Here are some of the most common window functions in SQL:
+
+   1. **ROW_NUMBER()**: Assigns a unique sequential integer to rows within a partition of a result    set, starting at 1 for the first row in each partition.
+   
+   2. **RANK()**: Assigns a rank to each row within a partition of a result set, with gaps in the  ranking for tied rows.
+   
+   3. **DENSE_RANK()**: Similar to `RANK()`, but without gaps in the ranking for tied rows.  Consecutive rank values are assigned in the event of ties.
+   
+   4. **NTILE(n)**: Divides the rows in an ordered partition into `n` approximately equal groups.  `NTILE` assigns a bucket number to each row for grouping purposes.
+   
+   5. **LEAD(value, [offset], [default])**: Returns the value of the specified column in a row that   is a certain number of rows after the current row within the partition. If there is no such row,  an optional default value can be returned.
+   
+   6. **LAG(value, [offset], [default])**: Similar to `LEAD()`, but returns the value of the    specified column in a row that is a certain number of rows before the current row within the    partition.
+   
+   7. **FIRST_VALUE(column)**: Returns the first value in an ordered set of values in the window   frame.
+   
+   8. **LAST_VALUE(column)**: Returns the last value in an ordered set of values in the window frame.    Note that proper use of `LAST_VALUE` may require specific frame specification due to its default   window frame behavior.
+   
+   9. **SUM(column)**: Calculates the sum of the specified column for each row in the window frame.
+   
+   10. **AVG(column)**: Calculates the average of the specified column for each row in the window  frame.
+   
+   11. **MIN(column)**: Finds the minimum value of the specified column for each row in the window    frame.
+   
+   12. **MAX(column)**: Finds the maximum value of the specified column for each row in the window    frame.
+   
+   13. **COUNT(column)**: Counts the rows in the window frame. If a specific column is provided, it   counts the non-NULL values in that column.
+   
+   These window functions can be used with the `OVER()` clause, which defines how the rows are  partitioned and ordered for the calculation. The `OVER()` clause can include `PARTITION BY` to   divide the result set into partitions where the window function is applied, and `ORDER BY` to  specify the order within each partition.
    - **Example #1**: Rank users based on their scores.
      ```sql
      SELECT name, score, RANK() OVER (ORDER BY score DESC)
@@ -95,7 +125,7 @@ Preparing for a SQL interview as a data scientist involves focusing on several k
      SELECT CAST('2023-01-01' AS DATE);
      ```
 
-9. **Handling NULLs and Data Cleaning Techniques**:
+9.  **Handling NULLs and Data Cleaning Techniques**:
    - **Example**: Coalesce function to replace NULLs.
      ```sql
      SELECT COALESCE(column_name, 'default_value') FROM table;
