@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 10 Essential Algorithms
+title: Basic Python Method
 parent: Data Structure and Algorithms
 nav_order: 8
 ---
