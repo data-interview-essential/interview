@@ -90,6 +90,37 @@ except ZeroDivisionError:
     print("Cannot divide by zero!")
 ```
 
+```python
+def divide(x, y):
+    """Divide x by y."""
+    return x / y
+
+# Using try and except to handle potential errors
+try:
+    result = divide(10, 0)  # This will raise a ZeroDivisionError
+except ZeroDivisionError:
+    print("You can't divide by zero!")
+else:
+    print("Result is:", result)
+finally:
+    print("Executing the final block...")
+```
+
+```python
+try:
+    # Code that might raise multiple types of exceptions
+    pass
+except ZeroDivisionError:
+    # Handle division by zero error
+    pass
+except ValueError:
+    # Handle value error
+    pass
+except Exception as e:
+    # Handle any other exceptions that weren't caught by the previous blocks
+    print("An unexpected error occurred:", e)
+```
+
 ### 5. Math Operations
 
 Basic math operations include addition (`+`), subtraction (`-`), multiplication (`*`), division (`/`), modulus (`%`), exponentiation (`**`), and floor division (`//`).
@@ -259,9 +290,7 @@ print(lst)  # Output: [1, 3]
 #### `sort`
 Sorts the list in place.
 ```python
-lst = [
-
-3, 1, 2]
+lst = [3, 1, 2]
 lst.sort()
 print(lst)  # Output: [1, 2, 3]
 ```
@@ -551,6 +580,23 @@ lst.sort(key=lambda x: x[1], reverse=True)
 print(lst)  # [('cherry', 3), ('apple', 2), ('banana', 1)]
 ```
 
+```python
+my_dict = {'banana': 3, 'apple': 2, 'pear': 1, 'orange': 4}
+sorted_items = sorted(my_dict.items())
+
+for key, value in sorted_items:
+    print(key, value)
+# This will print the items sorted by key
+```
+
+```python
+my_dict = {'banana': 3, 'apple': 2, 'pear': 1, 'orange': 4}
+sorted_dict = {k: v for k, v in sorted(my_dict.items(), key=lambda item: item[1])}
+# sorted by value
+print(sorted_dict)
+# Output: {'pear': 1, 'apple': 2, 'banana': 3, 'orange': 4}
+```
+
 ### 18. List with Map Function
 
 - `map` applies a function to all items in an input list. A common use is with a lambda function for concise transformations.
@@ -559,6 +605,18 @@ print(lst)  # [('cherry', 3), ('apple', 2), ('banana', 1)]
 numbers = [1, 2, 3, 4]
 sqr_numbers = list(map(lambda x: x**2, numbers))
 print(sqr_numbers)  # [1, 4, 9, 16]
+```
+
+```python
+numbers = [1, 2, 3, 4]
+
+def double_num_fun(x):
+    return 2*x
+
+double_num = list(map(lambda x:double_num_fun(x), numbers))
+
+print(double_num)
+# Output [2, 4, 6, 8]
 ```
 
 These examples and explanations cover a wide range of Python's functionality, from basic data manipulation to more complex operations involving functions and data structures, providing a solid foundation for understanding and using Python effectively.

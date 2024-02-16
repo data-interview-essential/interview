@@ -461,8 +461,6 @@ These LeetCode problems and their solutions will allow you to practice and apply
    ```
    Explanation: The first code snippet reverses a singly linked list by changing the direction of pointers. The second code snippet removes duplicates from a sorted linked list by updating pointers to skip duplicates.
 
-Certainly! Let's continue with explanations and solutions for the remaining algorithms:
-
 7. Sorting Fundamentals (Quicksort, Mergesort, Bubblesort):
    Problem (Quicksort): [Sort an Array](https://leetcode.com/problems/sort-an-array/)
    Solution (Quicksort):
